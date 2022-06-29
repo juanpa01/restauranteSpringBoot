@@ -1,4 +1,4 @@
-@Library('ceiba-jenkins-library@master') _
+// @Library('ceiba-jenkins-library@master') _
 pipeline{
 	// any -> tomaria slave 5 u 8
 	// Para mobile se debe especificar el slave -> {label 'Slave_Mac'}
@@ -8,7 +8,7 @@ pipeline{
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
         disableConcurrentBuilds()
-        gitLabConnection('GitCeiba')
+        // gitLabConnection('GitCeiba')
     }
 	
     environment {
@@ -32,6 +32,28 @@ pipeline{
             choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
             password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a passwor')
      }*/
+
+    stage('CheckoutModule1') {
+        steps {
+            sh 'mkdir -p comun'
+            dir("comun")
+            {
+                git branch: '${BRANCH_NAME}',
+                url: 'https://github.com/juanpa01/comun.git'
+            }
+        }
+    }
+
+    stage('CheckoutModule2') {
+        steps {
+            sh 'mkdir -p restauranteSpringBoot'
+            dir("restauranteSpringBoot")
+            {
+                git branch: '${BRANCH_NAME}',
+                url: 'https://github.com/juanpa01/restauranteSpringBoot.git'
+            }
+        }
+    }
 	
     stages{
         stage('Checkout') {
@@ -44,12 +66,11 @@ pipeline{
                 // )
 
                 //Esta opción se usa cuando el comun está centralizado para varios microservicios
-                gitCheckoutWithComun(
+                /*gitCheckoutWithComun(
                     urlProject:'https://github.com/juanpa01/restauranteSpringBoot.git',
                     branchProject: '${BRANCH_NAME}',
                     urlComun: 'https://github.com/juanpa01/comun.git'
-                )
-
+                )*/
                 dir("${PROJECT_PATH_BACK}"){
                     sh 'chmod +x ./gradlew'
                     sh './gradlew clean'
