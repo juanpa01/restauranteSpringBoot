@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<restaurante>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ceiba.Application",
+            "projectName": "restaurante",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
