@@ -61,27 +61,27 @@ pipeline{
 
         
 
-        stage('Checkout') {
-            steps {
-                echo '------------>Checkout desde Git Microservicio<------------'
-                //Esta opción se usa para el checkout sencillo de un microservicio
-                gitCheckout(
-                     urlProject:'https://github.com/juanpa01/restauranteSpringBoot.git',
-                     branchProject: '${BRANCH_NAME}',
-                 )
+        // stage('Checkout') {
+        //     steps {
+        //         echo '------------>Checkout desde Git Microservicio<------------'
+        //         //Esta opción se usa para el checkout sencillo de un microservicio
+        //         gitCheckout(
+        //              urlProject:'https://github.com/juanpa01/restauranteSpringBoot.git',
+        //              branchProject: '${BRANCH_NAME}',
+        //          )
 
-                //Esta opción se usa cuando el comun está centralizado para varios microservicios
-                /*gitCheckoutWithComun(
-                    urlProject:'https://github.com/juanpa01/restauranteSpringBoot.git',
-                    branchProject: '${BRANCH_NAME}',
-                    urlComun: 'https://github.com/juanpa01/comun.git'
-                )*/
-                dir("${PROJECT_PATH_BACK}"){
-                    sh 'chmod +x ./gradlew'
-                    sh './gradlew clean'
-                }
-            }
-        }
+        //         //Esta opción se usa cuando el comun está centralizado para varios microservicios
+        //         /*gitCheckoutWithComun(
+        //             urlProject:'https://github.com/juanpa01/restauranteSpringBoot.git',
+        //             branchProject: '${BRANCH_NAME}',
+        //             urlComun: 'https://github.com/juanpa01/comun.git'
+        //         )*/
+        //         dir("${PROJECT_PATH_BACK}"){
+        //             sh 'chmod +x ./gradlew'
+        //             sh './gradlew clean'
+        //         }
+        //     }
+        // }
 
         stage('Compilacion y Test Unitarios'){
             // El "parallel" es si vamos a correr los test del frontend en paralelo con los test de backend, se configura en otro stage dentro de parallel
@@ -117,8 +117,8 @@ pipeline{
             }
             steps{
                 echo '------------>Análisis de código estático<------------'
-                withSonarQubeEnv('Sonar') {
-                    sh "${env.SONARSCANNER} -Dsonar.projectKey=co.com.ceiba.proyecto:adn.${BRANCH_NAME} -Dsonar.projectName=co.com.ceiba.proyecto:adn${BRANCH_NAME} -Dproject.settings=./sonar-project.properties"
+                withSonarQubeEnv('SonarQubePruebas') {
+                    sh "./gradlew sonarqube"
                 }
                 echo '------------>Revision de Quality Gates<------------'
                 sleep 5
