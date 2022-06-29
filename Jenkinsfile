@@ -8,7 +8,7 @@ pipeline{
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
         disableConcurrentBuilds()
-        gitLabConnection('GitCeiba')
+        // gitLabConnection('GitCeiba')
     }
 	
     environment {
@@ -21,7 +21,7 @@ pipeline{
     }
 	
     tools {
-        jdk 'JDK13_Centos'
+        jdk '11'
     }
 	
     // Parametros disponibles en jenkins
