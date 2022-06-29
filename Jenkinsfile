@@ -1,4 +1,4 @@
-@Library('ceiba-jenkins-library@master') _
+// @Library('ceiba-jenkins-library@master') _
 pipeline{
 	// any -> tomaria slave 5 u 8
 	// Para mobile se debe especificar el slave -> {label 'Slave_Mac'}
@@ -20,9 +20,9 @@ pipeline{
         pollSCM('@daily') //define un intervalo regular en el que Jenkins debería verificar los cambios de fuente nuevos
     }
 	
-    tools {
-        jdk 'JDK13_Centos'
-    }
+    // tools {
+    //     jdk 'JDK13_Centos'
+    // }
 	
     // Parametros disponibles en jenkins
      /*parameters{
