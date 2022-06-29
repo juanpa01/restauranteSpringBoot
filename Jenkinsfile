@@ -34,7 +34,20 @@ pipeline{
      }*/
 	
     stages{
-            stage('Checkoutcomun') {
+
+        stage('CheckoutrestauranteSpringBoot') {
+            steps {
+                // sh 'mkdir -p restauranteSpringBoot'
+                dir("restauranteSpringBoot")
+                {
+                    git branch: '${BRANCH_NAME}',
+                    credentialsId:  '4b7363c0-04e8-478f-bc50-9e7750f44f61',
+                    url: 'https://github.com/juanpa01/restauranteSpringBoot.git'
+                }
+            }
+        }
+
+        stage('Checkoutcomun') {
             steps {
                 sh 'mkdir -p comun'
                 dir("comun")
@@ -46,17 +59,7 @@ pipeline{
             }
         }
 
-        stage('CheckoutModule2') {
-            steps {
-                // sh 'mkdir -p restauranteSpringBoot'
-                dir("restauranteSpringBoot")
-                {
-                    git branch: '${BRANCH_NAME}',
-                    credentialsId:  '4b7363c0-04e8-478f-bc50-9e7750f44f61',
-                    url: 'https://github.com/juanpa01/restauranteSpringBoot.git'
-                }
-            }
-        }
+        
 
         stage('Checkout') {
             steps {
