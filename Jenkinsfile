@@ -34,7 +34,7 @@ pipeline{
      }*/
 	
     stages{
-            stage('CheckoutModule1') {
+            stage('Checkoutcomun') {
             steps {
                 sh 'mkdir -p comun'
                 dir("comun")
@@ -47,7 +47,7 @@ pipeline{
 
         stage('CheckoutModule2') {
             steps {
-                sh 'mkdir -p restauranteSpringBoot'
+                // sh 'mkdir -p restauranteSpringBoot'
                 dir("restauranteSpringBoot")
                 {
                     git branch: '${BRANCH_NAME}',
