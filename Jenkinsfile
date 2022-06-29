@@ -40,6 +40,7 @@ pipeline{
                 dir("comun")
                 {
                     git branch: '${BRANCH_NAME}',
+                    credentialsId:  '4b7363c0-04e8-478f-bc50-9e7750f44f61',
                     url: 'https://github.com/juanpa01/comun.git'
                 }
             }
@@ -51,6 +52,7 @@ pipeline{
                 dir("restauranteSpringBoot")
                 {
                     git branch: '${BRANCH_NAME}',
+                    credentialsId:  '4b7363c0-04e8-478f-bc50-9e7750f44f61',
                     url: 'https://github.com/juanpa01/restauranteSpringBoot.git'
                 }
             }
