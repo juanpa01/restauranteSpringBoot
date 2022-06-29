@@ -5,16 +5,9 @@ pipeline{
     stages{
         stage('checkout'){
             steps{
-                git branch: '${BRANCH_NAME}', credentialsId: 'githubId', url: 'https://github.com/juanpa01/restauranteSpringBoot'
+                git branch: 'main', credentialsId: 'githubId', url: 'https://github.com/juanpa01/restauranteSpringBoot'
             }
         }
-        
-        /*
-        stage('checkout2'){
-            steps{
-                git branch: '${BRANCH_NAME}', credentialsId: 'githubId', url: 'https://github.com/juanpa01/comun'
-            }
-        }*/
 
         
                 /*
