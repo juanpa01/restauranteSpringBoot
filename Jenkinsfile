@@ -8,7 +8,7 @@ pipeline{
 	
     stages{
         stage('checkout'){
-            strps{
+            steps{
                 git credentialsId: 'githubId', url: 'https://github.com/juanpa01/restauranteSpringBoot.git'
             }
         }
