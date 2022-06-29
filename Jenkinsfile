@@ -35,29 +35,29 @@ pipeline{
 	
     stages{
 
-        stage('CheckoutrestauranteSpringBoot') {
-            steps {
-                // sh 'mkdir -p restauranteSpringBoot'
-                dir("restauranteSpringBoot")
-                {
-                    git branch: '${BRANCH_NAME}',
-                    credentialsId:  '4b7363c0-04e8-478f-bc50-9e7750f44f61',
-                    url: 'https://github.com/juanpa01/restauranteSpringBoot.git'
-                }
-            }
-        }
+        // stage('CheckoutrestauranteSpringBoot') {
+        //     steps {
+        //         // sh 'mkdir -p restauranteSpringBoot'
+        //         dir("restauranteSpringBoot")
+        //         {
+        //             git branch: '${BRANCH_NAME}',
+        //             credentialsId:  '4b7363c0-04e8-478f-bc50-9e7750f44f61',
+        //             url: 'https://github.com/juanpa01/restauranteSpringBoot.git'
+        //         }
+        //     }
+        // }
 
-        stage('Checkoutcomun') {
-            steps {
-                sh 'mkdir -p comun'
-                dir("comun")
-                {
-                    git branch: '${BRANCH_NAME}',
-                    credentialsId:  '4b7363c0-04e8-478f-bc50-9e7750f44f61',
-                    url: 'https://github.com/juanpa01/comun.git'
-                }
-            }
-        }
+        // stage('Checkoutcomun') {
+        //     steps {
+        //         sh 'mkdir -p comun'
+        //         dir("comun")
+        //         {
+        //             git branch: '${BRANCH_NAME}',
+        //             credentialsId:  '4b7363c0-04e8-478f-bc50-9e7750f44f61',
+        //             url: 'https://github.com/juanpa01/comun.git'
+        //         }
+        //     }
+        // }
 
         
 
@@ -65,10 +65,10 @@ pipeline{
             steps {
                 echo '------------>Checkout desde Git Microservicio<------------'
                 //Esta opción se usa para el checkout sencillo de un microservicio
-                // gitCheckout(
-                //     urlProject:'https://github.com/juanpa01/restauranteSpringBoot.git',
-                //     branchProject: '${BRANCH_NAME}',
-                // )
+                gitCheckout(
+                     urlProject:'https://github.com/juanpa01/restauranteSpringBoot.git',
+                     branchProject: '${BRANCH_NAME}',
+                 )
 
                 //Esta opción se usa cuando el comun está centralizado para varios microservicios
                 /*gitCheckoutWithComun(
