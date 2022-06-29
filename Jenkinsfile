@@ -32,30 +32,30 @@ pipeline{
             choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
             password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a passwor')
      }*/
-
-    stage('CheckoutModule1') {
-        steps {
-            sh 'mkdir -p comun'
-            dir("comun")
-            {
-                git branch: '${BRANCH_NAME}',
-                url: 'https://github.com/juanpa01/comun.git'
-            }
-        }
-    }
-
-    stage('CheckoutModule2') {
-        steps {
-            sh 'mkdir -p restauranteSpringBoot'
-            dir("restauranteSpringBoot")
-            {
-                git branch: '${BRANCH_NAME}',
-                url: 'https://github.com/juanpa01/restauranteSpringBoot.git'
-            }
-        }
-    }
 	
     stages{
+            stage('CheckoutModule1') {
+            steps {
+                sh 'mkdir -p comun'
+                dir("comun")
+                {
+                    git branch: '${BRANCH_NAME}',
+                    url: 'https://github.com/juanpa01/comun.git'
+                }
+            }
+        }
+
+        stage('CheckoutModule2') {
+            steps {
+                sh 'mkdir -p restauranteSpringBoot'
+                dir("restauranteSpringBoot")
+                {
+                    git branch: '${BRANCH_NAME}',
+                    url: 'https://github.com/juanpa01/restauranteSpringBoot.git'
+                }
+            }
+        }
+
         stage('Checkout') {
             steps {
                 echo '------------>Checkout desde Git Microservicio<------------'
