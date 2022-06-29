@@ -1,18 +1,15 @@
-pipeline {
-    agent any
+
+pipeline{
+ agent any
+ 	
     triggers {
-        pollSCM '* * * * *'
+        pollSCM('@daily') 
     }
-    stages {
-        stage('Build') {
-            steps {
-                sh './gradlew assemble'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh './gradlew test'
-            }
+	
+    stages{
+        stage('checkout'){
+            git credentialsId: 'githubId', url: 'https://github.com/juanpa01/restauranteSpringBoot.git'
         }
     }
+	
 }
