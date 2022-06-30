@@ -39,7 +39,7 @@ pipeline{
         
         stage('checkout2'){
             steps{
-                sh 'mkdir -p comun'
+                sh 'mkdir comun'
                 dir("comun") {
                     git branch: 'main', credentialsId: '4b7363c0-04e8-478f-bc50-9e7750f44f61', url: 'https://github.com/juanpa01/comun'
                 }
@@ -100,7 +100,7 @@ pipeline{
                  stage('Test-Backend'){
                      steps {
                          echo '------------>Test Backend<------------'
-                         sh './gradlew tasks'
+                         sh './gradlew --stacktrace test'
                      }
                     //  post{
                     //      always {
