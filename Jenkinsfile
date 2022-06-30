@@ -39,7 +39,10 @@ pipeline{
         
         stage('checkout2'){
             steps{
-                git branch: 'main', credentialsId: '4b7363c0-04e8-478f-bc50-9e7750f44f61', url: 'https://github.com/juanpa01/comun'
+                sh 'mkdir -p comun'
+                dir("comun") {
+                    git branch: 'main', credentialsId: '4b7363c0-04e8-478f-bc50-9e7750f44f61', url: 'https://github.com/juanpa01/comun'
+                }
             }
         }
 
@@ -94,7 +97,7 @@ pipeline{
          stage('Compilacion y Test Unitarios'){
              // El "parallel" es si vamos a correr los test del frontend en paralelo con los test de backend, se configura en otro stage dentro de parallel
              parallel {
-                 stage('Test- Backend'){
+                 stage('Test-Backend'){
                      steps {
                          echo '------------>Test Backend<------------'
                          sh './gradlew tasks'
