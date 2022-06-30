@@ -97,12 +97,12 @@ pipeline{
                  stage('Test- Backend'){
                      steps {
                          echo '------------>Test Backend<------------'
-                         sh './gradlew --stacktrace test'
+                         sh './gradlew test'
                      }
-                     post{
-                         always {
-                             junit '**/build/test-results/test/*.xml' //Configuración de los reportes de JUnit
-                         }
+                    //  post{
+                    //      always {
+                    //          junit '**/build/test-results/test/*.xml' //Configuración de los reportes de JUnit
+                    //      }
                      }
                  }
                  /*
