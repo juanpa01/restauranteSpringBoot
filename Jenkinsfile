@@ -40,7 +40,6 @@ pipeline{
         stage('checkout2'){
             steps{
                 git branch: 'main', credentialsId: '4b7363c0-04e8-478f-bc50-9e7750f44f61', url: 'https://github.com/juanpa01/comun'
-
             }
         }
 
@@ -92,23 +91,21 @@ pipeline{
         //     }
         // }
 
-        // stage('Compilacion y Test Unitarios'){
-        //     // El "parallel" es si vamos a correr los test del frontend en paralelo con los test de backend, se configura en otro stage dentro de parallel
-        //     parallel {
-        //         stage('Test- Backend'){
-        //             steps {
-        //                 echo '------------>Test Backend<------------'
-        //                 dir("${PROJECT_PATH_BACK}"){
-        //                     sh './gradlew --stacktrace test'
-        //                 }
-        //             }
-        //             post{
-        //                 always {
-        //                     junit '**/build/test-results/test/*.xml' //Configuración de los reportes de JUnit
-        //                 }
-        //             }
-        //         }
-        //         /*
+         stage('Compilacion y Test Unitarios'){
+             // El "parallel" es si vamos a correr los test del frontend en paralelo con los test de backend, se configura en otro stage dentro de parallel
+             parallel {
+                 stage('Test- Backend'){
+                     steps {
+                         echo '------------>Test Backend<------------'
+                         sh './gradlew --stacktrace test'
+                     }
+                     post{
+                         always {
+                             junit '**/build/test-results/test/*.xml' //Configuración de los reportes de JUnit
+                         }
+                     }
+                 }
+                 /*
         //         stage('Test- Frontend'){
         //             steps {
         //                 echo '------------>Test Frontend<------------'
@@ -118,8 +115,8 @@ pipeline{
         //             }
         //         }
         //         */
-        //     }
-        // }
+            }
+        }
         // stage('Static Code Analysis') {
         //     environment {
         //         SONARSCANNER = "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
