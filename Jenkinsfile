@@ -97,7 +97,7 @@ pipeline{
                  stage('Test- Backend'){
                      steps {
                          echo '------------>Test Backend<------------'
-                         sh './gradlew test'
+                         sh './gradlew tasks'
                      }
                     //  post{
                     //      always {
