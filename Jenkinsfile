@@ -120,22 +120,22 @@ pipeline{
                 */
             }
         }
-        stage('Static Code Analysis') {
-            environment {
-                SONARSCANNER = "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
-            }
-            steps{
-                echo '------------>Análisis de código estático<------------'
-                withSonarQubeEnv('SonarQubePruebas') {
-                    sh "./gradlew sonarqube"
-                }
-                echo '------------>Revision de Quality Gates<------------'
-                sleep 5
-                timeout(time: 1, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-			}
-        }
+        // stage('Static Code Analysis') {
+        //     environment {
+        //         SONARSCANNER = "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
+        //     }
+        //     steps{
+        //         echo '------------>Análisis de código estático<------------'
+        //         withSonarQubeEnv('SonarQubePruebas') {
+        //             sh "./gradlew sonarqube"
+        //         }
+        //         echo '------------>Revision de Quality Gates<------------'
+        //         sleep 5
+        //         timeout(time: 1, unit: 'MINUTES') {
+        //             waitForQualityGate abortPipeline: true
+        //         }
+		// 	}
+        // }
 
         stage('Build'){
             parallel {
@@ -143,7 +143,7 @@ pipeline{
                     steps{
                         echo "------------>Compilación backend<------------"
                         dir("${PROJECT_PATH_BACK}"){
-                            sh './gradlew build -x test'
+                            sh './gradlew build '
                         }
                     }
                 }
