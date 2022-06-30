@@ -144,26 +144,26 @@ pipeline{
                 stage('construcción Backend'){
                     steps{
                         echo "------------>Compilación backend<------------"
-                        dir("${PROJECT_PATH_BACK}"){
-                            sh './gradlew build '
-                        }
+                        
+                        sh './gradlew build '
+                        
                     }
                 }
             }
          }
     }
 	
-    post {
-        failure {
-            mail(
-                to: 'juan.martinez@ceiba.com.co',
-                body:"Build failed in Jenkins: Project: ${env.JOB_NAME} Build /n Number: ${env.BUILD_NUMBER} URL de build: ${env.BUILD_NUMBER}/n/nPlease go to ${env.BUILD_URL} and verify the build",
-                subject: "ERROR CI: ${env.JOB_NAME}"
-            )
-            updateGitlabCommitStatus name: 'IC Jenkins', state: 'failed'
-        }
-        success {
-            updateGitlabCommitStatus name: 'IC Jenkins', state: 'success'
-        }
-    }	
+    // post {
+    //     failure {
+    //         mail(
+    //             to: 'juan.martinez@ceiba.com.co',
+    //             body:"Build failed in Jenkins: Project: ${env.JOB_NAME} Build /n Number: ${env.BUILD_NUMBER} URL de build: ${env.BUILD_NUMBER}/n/nPlease go to ${env.BUILD_URL} and verify the build",
+    //             subject: "ERROR CI: ${env.JOB_NAME}"
+    //         )
+    //         updateGitlabCommitStatus name: 'IC Jenkins', state: 'failed'
+    //     }
+    //     success {
+    //         updateGitlabCommitStatus name: 'IC Jenkins', state: 'success'
+    //     }
+    // }	
 }
