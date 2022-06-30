@@ -28,17 +28,18 @@ pipeline{
      }*/
 	
     stages{
-
          stage('checkout'){
             steps{
-                git branch: 'main', credentialsId: 'githubId', url: 'https://github.com/juanpa01/restauranteSpringBoot'
+                git branch: 'main', credentialsId: '4b7363c0-04e8-478f-bc50-9e7750f44f61', url: 'https://github.com/juanpa01/restauranteSpringBoot'
             }
         }
 
         
         stage('checkout2'){
             steps{
-                git branch: '${BRANCH_NAME}', credentialsId: 'githubId', url: 'https://github.com/juanpa01/comun'
+                sh 'mkdir -p comun'
+                dir("comun")
+                git branch: 'main', credentialsId: '4b7363c0-04e8-478f-bc50-9e7750f44f61', url: 'https://github.com/juanpa01/comun'
             }
         }
 
